@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe — Resume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===== CSS Variables ===== */
+        :root {
+            --primary: #000022;
+            --accent: #9B8816;
+            --light-gray: #C1C1C1;
+            --wine: #89023E;
+            --white: #FFFFFF;
+            --off-white: #F7F6F2;
+            --bg-sidebar: #000022;
+            --bg-main: #F7F6F2;
+            --text-primary: #000022;
+            --text-light: #C1C1C1;
+            --text-sidebar: #E8E8E8;
+            --heading-font: 'Playfair Display', Georgia, serif;
+            --body-font: 'Source Sans 3', 'Segoe UI', sans-serif;
+            --fa-font: 'Vazirmatn', 'Tahoma', sans-serif;
+            --sidebar-width: 320px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ===== Reset ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--body-font);
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-size: 15px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== RTL Support ===== */
+        html[dir="rtl"] body {
+            font-family: var(--fa-font);
+        }
+        html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3,
+        html[dir="rtl"] .section-title {
+            font-family: var(--fa-font);
+        }
+
+        /* ===== Layout ===== */
+        .page-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ===== Sidebar ===== */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--bg-sidebar);
+            color: var(--text-sidebar);
+            padding: 48px 32px 40px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 10;
+            transition: transform var(--transition);
+        }
+
+        html[dir="rtl"] .sidebar {
+            left: auto;
+            right: 0;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(155,136,22,0.4);
+            border-radius: 4px;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--wine));
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--heading-font);
+            font-size: 40px;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-avatar::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.15);
+        }
+
+        .sidebar-name {
+            font-family: var(--heading-font);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        html[dir="rtl"] .sidebar-name {
+            font-family: var(--fa-font);
+            letter-spacing: 0;
+        }
+
+        .sidebar-tagline {
+            font-size: 13px;
+            color: var(--accent);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        html[dir="rtl"] .sidebar-tagline {
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(155,136,22,0.4), transparent);
+            margin: 24px 0;
+        }
+
+        .sidebar-section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        html[dir="rtl"] .sidebar-section-title {
+            letter-spacing: 0;
+            text-transform: none;
+            font-size: 13px;
+        }
+
+        .contact-list {
+            list-style: none;
+            margin-bottom: 8px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            font-size: 13.5px;
+            color: var(--text-sidebar);
+            transition: color var(--transition);
+        }
+
+        .contact-item:hover {
+            color: var(--accent);
+        }
+
+        .contact-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(155,136,22,0.12);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: background var(--transition);
+        }
+
+        .contact-item:hover .contact-icon {
+            background: rgba(155,136,22,0.25);
+        }
+
+        .contact-icon svg {
+            width: 15px;
+            height: 15px;
+            fill: var(--accent);
+        }
+
+        .contact-item a {
+            color: inherit;
+            text-decoration: none;
+            transition: color var(--transition);
+            word-break: break-all;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent);
+        }
+
+        .sidebar-languages {
+            margin-top: auto;
+        }
+
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            font-size: 13.5px;
+        }
+
+        .language-level {
+            font-size: 11px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Lang Switch */
+        .lang-switch {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1.5px solid var(--accent);
+            color: var(--accent);
+            padding: 8px 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all var(--transition);
+            font-family: var(--body-font);
+        }
+
+        .lang-btn:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* ===== Main Content ===== */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 56px 56px 80px;
+            max-width: 900px;
+        }
+
+        html[dir="rtl"] .main-content {
+            margin-left: 0;
+            margin-right: var(--sidebar-width);
+        }
+
+        /* Section styling */
+        .section {
+            margin-bottom: 52px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+        .section:nth-child(5) { animation-delay: 0.5s; }
+        .section:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-family: var(--heading-font);
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 6px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        html[dir="rtl"] .section-title::after {
+            left: auto;
+            right: 0;
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            color: var(--light-gray);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 28px;
+            font-weight: 500;
+        }
+
+        html[dir="rtl"] .section-subtitle {
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        /* ===== About / Summary ===== */
+        .about-text {
+            font-size: 16px;
+            line-height: 1.85;
+            color: #333;
+            max-width: 680px;
+        }
+
+        .about-text .highlight {
+            color: var(--wine);
+            font-weight: 600;
+        }
+
+        /* ===== Experience Timeline ===== */
+        .timeline {
+            position: relative;
+            padding-left: 28px;
+        }
+
+        html[dir="rtl"] .timeline {
+            padding-left: 0;
+            padding-right: 28px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent), var(--light-gray));
+            border-radius: 2px;
+        }
+
+        html[dir="rtl"] .timeline::before {
+            left: auto;
+            right: 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 36px;
+            padding-left: 24px;
+        }
+
+        html[dir="rtl"] .timeline-item {
+            padding-left: 0;
+            padding-right: 24px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid var(--bg-main);
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+
+        html[dir="rtl"] .timeline-item::before {
+            left: auto;
+            right: -33px;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .timeline-title {
+            font-family: var(--heading-font);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        html[dir="rtl"] .timeline-title {
+            font-family: var(--fa-font);
+        }
+
+        .timeline-company {
+            font-size: 14px;
+            color: var(--wine);
+            font-weight: 600;
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            color: var(--light-gray);
+            font-weight: 600;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .timeline-desc {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.75;
+        }
+
+        .timeline-desc ul {
+            list-style: none;
+            margin-top: 8px;
+        }
+
+        .timeline-desc ul li {
+            position: relative;
+            padding-left: 16px;
+            margin-bottom: 5px;
+        }
+
+        html[dir="rtl"] .timeline-desc ul li {
+            padding-left: 0;
+            padding-right: 16px;
+        }
+
+        .timeline-desc ul li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        html[dir="rtl"] .timeline-desc ul li::before {
+            left: auto;
+            right: 0;
+        }
+
+        /* ===== Skills ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .skill-category h4 {
+            font-family: var(--heading-font);
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 14px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(0,0,34,0.08);
+        }
+
+        html[dir="rtl"] .skill-category h4 {
+            font-family: var(--fa-font);
+        }
+
+        .skill-bar-item {
+            margin-bottom: 12px;
+        }
+
+        .skill-bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        .skill-bar-track {
+            height: 6px;
+            background: rgba(0,0,34,0.06);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--wine));
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0;
+        }
+
+        html[dir="rtl"] .skill-bar-fill {
+            background: linear-gradient(270deg, var(--accent), var(--wine));
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: rgba(0,0,34,0.04);
+            border: 1px solid rgba(0,0,34,0.08);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 12.5px;
+            font-weight: 500;
+            color: #444;
+            transition: all var(--transition);
+        }
+
+        .skill-tag:hover {
+            background: var(--accent);
+            color: var(--white);
+            border-color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        /* ===== Projects ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 28px;
+            border: 1px solid rgba(0,0,34,0.06);
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--wine));
+            transform: scaleX(0);
+            transition: transform var(--transition);
+            transform-origin: left;
+        }
+
+        html[dir="rtl"] .project-card::before {
+            transform-origin: right;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,34,0.08);
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-number {
+            font-family: var(--heading-font);
+            font-size: 36px;
+            font-weight: 900;
+            color: rgba(0,0,34,0.04);
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .project-title {
+            font-family: var(--heading-font);
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        html[dir="rtl"] .project-title {
+            font-family: var(--fa-font);
+        }
+
+        .project-desc {
+            font-size: 13.5px;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .project-tech span {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--wine);
+            background: rgba(137,2,62,0.06);
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: 12px;
+            transition: gap var(--transition);
+        }
+
+        .project-link:hover {
+            gap: 8px;
+        }
+
+        .project-link svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--accent);
+        }
+
+        /* ===== Education ===== */
+        .education-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            margin-bottom: 28px;
+            padding: 20px 24px;
+            background: var(--white);
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,34,0.05);
+            transition: box-shadow var(--transition);
+        }
+
+        .education-item:hover {
+            box-shadow: 0 6px 24px rgba(0,0,34,0.06);
+        }
+
+        .edu-year {
+            font-family: var(--heading-font);
+            font-size: 28px;
+            font-weight: 900;
+            color: rgba(155,136,22,0.2);
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .edu-details h4 {
+            font-family: var(--heading-font);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 2px;
+        }
+
+        html[dir="rtl"] .edu-details h4 {
+            font-family: var(--fa-font);
+        }
+
+        .edu-details .edu-institution {
+            font-size: 13.5px;
+            color: var(--wine);
+            font-weight: 600;
+        }
+
+        .edu-details .edu-desc {
+            font-size: 13px;
+            color: #777;
+            margin-top: 4px;
+        }
+
+        /* ===== Mobile Menu Toggle ===== */
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--primary);
+            z-index: 20;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .mobile-header .mobile-name {
+            color: var(--white);
+            font-family: var(--heading-font);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        html[dir="rtl"] .mobile-header .mobile-name {
+            font-family: var(--fa-font);
+        }
+
+        .hamburger {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--white);
+            margin: 5px 0;
+            border-radius: 2px;
+            transition: all var(--transition);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,34,0.5);
+            z-index: 9;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 900px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-header {
+                display: flex;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+                width: 300px;
+            }
+
+            html[dir="rtl"] .sidebar {
+                transform: translateX(100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .sidebar-overlay.show {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 80px 24px 60px;
+            }
+
+            html[dir="rtl"] .main-content {
+                margin-right: 0;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+
+            .timeline-header {
+                flex-direction: column;
+                gap: 2px;
+            }
+
+            .education-item {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+        /* ===== Print Styles ===== */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            body {
+                font-size: 11px;
+                line-height: 1.5;
+            }
+
+            .page-wrapper {
+                display: grid;
+                grid-template-columns: 240px 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                width: 240px;
+                height: auto;
+                padding: 28px 20px;
+                break-inside: avoid;
+            }
+
+            .mobile-header,
+            .sidebar-overlay,
+            .lang-switch {
+                display: none !important;
+            }
+
+            .main-content {
+                margin: 0;
+                padding: 28px 32px;
+            }
+
+            .section {
+                opacity: 1;
+                transform: none;
+                animation: none;
+                margin-bottom: 24px;
+                break-inside: avoid;
+            }
+
+            .project-card, .education-item {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+
+            .project-card:hover, .education-item:hover {
+                transform: none;
+                box-shadow: none;
+            }
+
+            .section-title {
+                font-size: 18px;
+            }
+
+            .about-text {
+                font-size: 12px;
+            }
+
+            .profile-avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 28px;
+            }
+
+            .sidebar-name {
+                font-size: 18px;
+            }
+
+            .skill-bar-fill {
+                width: var(--fill) !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<div class="mobile-header">
+    <span class="mobile-name" data-en="John Doe" data-fa="جان دو">John Doe</span>
+    <button class="hamburger" aria-label="Toggle menu" onclick="toggleSidebar()">
+        <span></span><span></span><span></span>
+    </button>
+</div>
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<div class="page-wrapper">
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="profile-section">
+            <div class="profile-avatar">JD</div>
+            <h1 class="sidebar-name" data-en="John Doe" data-fa="جان دو">John Doe</h1>
+            <p class="sidebar-tagline" data-en="Full-Stack Developer" data-fa="توسعه‌دهنده فول‌استک">Full-Stack Developer</p>
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        <h3 class="sidebar-section-title" data-en="Contact" data-fa="اطلاعات تماس">Contact</h3>
+        <ul class="contact-list">
+            <li class="contact-item">
+                <span class="contact-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </span>
+                <a href="mailto:john.doe@email.com">john.doe@email.com</a>
+            </li>
+            <li class="contact-item">
+                <span class="contact-icon">
+                    <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </span>
+                <a href="https://linkedin.com/in/johndoe" target="_blank">linkedin.com/in/johndoe</a>
+            </li>
+            <li class="contact-item">
+                <span class="contact-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </span>
+                <a href="https://github.com/johndoe" target="_blank">github.com/johndoe</a>
+            </li>
+            <li class="contact-item">
+                <span class="contact-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                </span>
+                <span data-en="San Francisco, CA" data-fa="سان فرانسیسکو، کالیفرنیا">San Francisco, CA</span>
+            </li>
+        </ul>
+
+        <div class="sidebar-divider"></div>
+
+        <h3 class="sidebar-section-title" data-en="Languages" data-fa="زبان‌ها">Languages</h3>
+        <div class="language-item">
+            <span data-en="English" data-fa="انگلیسی">English</span>
+            <span class="language-level" data-en="Native" data-fa="زبان مادری">Native</span>
+        </div>
+        <div class="language-item">
+            <span data-en="Persian" data-fa="فارسی">Persian</span>
+            <span class="language-level" data-en="Fluent" data-fa="مسلط">Fluent</span>
+        </div>
+        <div class="language-item">
+            <span data-en="German" data-fa="آلمانی">German</span>
+            <span class="language-level" data-en="Intermediate" data-fa="متوسط">Intermediate</span>
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        <div class="lang-switch">
+            <button class="lang-btn" id="langBtn" onclick="toggleLang()">فارسی / FA</button>
+        </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+
+        <!-- About Me -->
+        <section class="section">
+            <h2 class="section-title" data-en="About Me" data-fa="درباره من">About Me</h2>
+            <p class="section-subtitle" data-en="who i am" data-fa="معرفی">who i am</p>
+            <p class="about-text" data-en="A passionate <span class='highlight'>Full-Stack Developer</span> with 7+ years of experience designing and building scalable web applications. Skilled in modern JavaScript frameworks, cloud architecture, and creating intuitive user experiences. Committed to writing clean, maintainable code and continuously learning emerging technologies. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore." data-fa="یک <span class='highlight'>توسعه‌دهنده فول‌استک</span> با بیش از ۷ سال تجربه در طراحی و ساخت اپلیکیشن‌های وب مقیاس‌پذیر. متخصص در فریمورک‌های مدرن جاوااسکریپت، معماری ابری و ایجاد تجربه‌های کاربری بصری. متعهد به نوشتن کد تمیز و قابل نگهداری و یادگیری مستمر فناوری‌های جدید. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحی گرافیک.">A passionate <span class="highlight">Full-Stack Developer</span> with 7+ years of experience designing and building scalable web applications. Skilled in modern JavaScript frameworks, cloud architecture, and creating intuitive user experiences. Committed to writing clean, maintainable code and continuously learning emerging technologies. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+        </section>
+
+        <!-- Experience -->
+        <section class="section">
+            <h2 class="section-title" data-en="Experience" data-fa="سوابق کاری">Experience</h2>
+            <p class="section-subtitle" data-en="where i've worked" data-fa="سابقه حرفه‌ای">where i've worked</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="timeline-title" data-en="Senior Full-Stack Developer" data-fa="توسعه‌دهنده ارشد فول‌استک">Senior Full-Stack Developer</div>
+                            <div class="timeline-company" data-en="TechCorp Solutions" data-fa="شرکت تک‌کورپ سولوشنز">TechCorp Solutions</div>
+                        </div>
+                        <span class="timeline-date" data-en="Jan 2022 — Present" data-fa="ژانویه ۲۰۲۲ — اکنون">Jan 2022 — Present</span>
+                    </div>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li data-en="Led a team of 5 developers to build a real-time analytics dashboard serving 50K+ users, improving data retrieval speed by 40%." data-fa="رهبری تیم ۵ نفره توسعه‌دهنده برای ساخت داشبورد تحلیلی بلادرنگ با بیش از ۵۰ هزار کاربر و بهبود ۴۰ درصدی سرعت بازیابی داده.">Led a team of 5 developers to build a real-time analytics dashboard serving 50K+ users, improving data retrieval speed by 40%.</li>
+                            <li data-en="Architected a microservices backend using Node.js and PostgreSQL, reducing server costs by 30%." data-fa="طراحی معماری میکروسرویس بک‌اند با Node.js و PostgreSQL و کاهش ۳۰ درصدی هزینه‌های سرور.">Architected a microservices backend using Node.js and PostgreSQL, reducing server costs by 30%.</li>
+                            <li data-en="Implemented CI/CD pipelines with GitHub Actions, cutting deployment time from 2 hours to 15 minutes." data-fa="پیاده‌سازی خطوط CI/CD با GitHub Actions و کاهش زمان استقرار از ۲ ساعت به ۱۵ دقیقه.">Implemented CI/CD pipelines with GitHub Actions, cutting deployment time from 2 hours to 15 minutes.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="timeline-title" data-en="Frontend Developer" data-fa="توسعه‌دهنده فرانت‌اند">Frontend Developer</div>
+                            <div class="timeline-company" data-en="Digital Agency XYZ" data-fa="آژانس دیجیتال XYZ">Digital Agency XYZ</div>
+                        </div>
+                        <span class="timeline-date" data-en="Mar 2019 — Dec 2021" data-fa="مارس ۲۰۱۹ — دسامبر ۲۰۲۱">Mar 2019 — Dec 2021</span>
+                    </div>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li data-en="Developed responsive web applications for 20+ clients using React and TypeScript." data-fa="توسعه اپلیکیشن‌های وب واکنش‌گرا برای بیش از ۲۰ مشتری با React و TypeScript.">Developed responsive web applications for 20+ clients using React and TypeScript.</li>
+                            <li data-en="Optimized web performance resulting in 60% improvement in Lighthouse scores across all projects." data-fa="بهینه‌سازی عملکرد وب با بهبود ۶۰ درصدی امتیاز Lighthouse در تمامی پروژه‌ها.">Optimized web performance resulting in 60% improvement in Lighthouse scores across all projects.</li>
+                            <li data-en="Mentored 3 junior developers, conducting weekly code reviews and pair programming sessions." data-fa="راهنمایی ۳ توسعه‌دهنده جونیور با برگزاری جلسات بازبینی کد و برنامه‌نویسی دونفره هفتگی.">Mentored 3 junior developers, conducting weekly code reviews and pair programming sessions.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="timeline-title" data-en="Junior Web Developer" data-fa="توسعه‌دهنده وب جونیور">Junior Web Developer</div>
+                            <div class="timeline-company" data-en="StartUp Labs" data-fa="استارت‌آپ لبز">StartUp Labs</div>
+                        </div>
+                        <span class="timeline-date" data-en="Jun 2017 — Feb 2019" data-fa="ژوئن ۲۰۱۷ — فوریه ۲۰۱۹">Jun 2017 — Feb 2019</span>
+                    </div>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li data-en="Built and maintained company website and internal tools using HTML, CSS, JavaScript, and PHP." data-fa="ساخت و نگهداری وب‌سایت شرکت و ابزارهای داخلی با HTML، CSS، JavaScript و PHP.">Built and maintained company website and internal tools using HTML, CSS, JavaScript, and PHP.</li>
+                            <li data-en="Collaborated with the design team to implement pixel-perfect UI components." data-fa="همکاری با تیم طراحی برای پیاده‌سازی کامپوننت‌های UI با دقت پیکسلی.">Collaborated with the design team to implement pixel-perfect UI components.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section class="section">
+            <h2 class="section-title" data-en="Skills" data-fa="مهارت‌ها">Skills</h2>
+            <p class="section-subtitle" data-en="what i'm good at" data-fa="توانمندی‌ها">what i'm good at</p>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4 data-en="Frontend" data-fa="فرانت‌اند">Frontend</h4>
+                    <div class="skill-bar-item">
+                        <div class="skill-bar-label"><span>React / Next.js</span><span>95%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="95" style="--fill:95%"></div></div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <div class="skill-bar-label"><span>TypeScript</span><span>90%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90" style="--fill:90%"></div></div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <div class="skill-bar-label"><span>CSS / Tailwind</span><span>92%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="92" style="--fill:92%"></div></div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <div class="skill-bar-label"><span>Vue.js</span><span>75%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75" style="--fill:75%"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h4 data-en="Backend" data-fa="بک‌اند">Backend</h4>
+                    <div class="skill-bar-item">
+                        <div class="skill-bar-label"><span>Node.js / Express</span><span>90%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90" style="--fill:90%"></div></div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <div class="skill-bar-label"><span>Python / Django</span><span>80%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80" style="--fill:80%"></div></div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <div class="skill-bar-label"><span>PostgreSQL / MongoDB</span><span>85%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85" style="--fill:85%"></div></div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <div class="skill-bar-label"><span>GraphQL</span><span>70%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="70" style="--fill:70%"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h4 data-en="DevOps & Tools" data-fa="دوآپس و ابزارها">DevOps & Tools</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">GitHub Actions</span>
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">Nginx</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h4 data-en="Soft Skills" data-fa="مهارت‌های نرم">Soft Skills</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag" data-en="Team Leadership" data-fa="رهبری تیم">Team Leadership</span>
+                        <span class="skill-tag" data-en="Agile / Scrum" data-fa="اجایل / اسکرام">Agile / Scrum</span>
+                        <span class="skill-tag" data-en="Problem Solving" data-fa="حل مسئله">Problem Solving</span>
+                        <span class="skill-tag" data-en="Communication" data-fa="ارتباطات">Communication</span>
+                        <span class="skill-tag" data-en="Mentoring" data-fa="مربی‌گری">Mentoring</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="section">
+            <h2 class="section-title" data-en="Projects" data-fa="پروژه‌ها">Projects</h2>
+            <p class="section-subtitle" data-en="selected work" data-fa="نمونه کارها">selected work</p>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-number">01</div>
+                    <h3 class="project-title" data-en="E-Commerce Platform" data-fa="پلتفرم تجارت الکترونیک">E-Commerce Platform</h3>
+                    <p class="project-desc" data-en="A full-featured e-commerce platform with real-time inventory management, payment integration, and admin dashboard. Built for scalability handling 10K+ concurrent users." data-fa="یک پلتفرم تجارت الکترونیک کامل با مدیریت موجودی بلادرنگ، یکپارچه‌سازی پرداخت و داشبورد مدیریت. طراحی شده برای مقیاس‌پذیری و مدیریت بیش از ۱۰ هزار کاربر همزمان.">A full-featured e-commerce platform with real-time inventory management, payment integration, and admin dashboard. Built for scalability handling 10K+ concurrent users.</p>
+                    <div class="project-tech">
+                        <span>Next.js</span><span>Node.js</span><span>Stripe</span><span>PostgreSQL</span>
+                    </div>
+                    <a href="#" class="project-link" data-en="View Project →" data-fa="مشاهده پروژه ←">View Project →</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">02</div>
+                    <h3 class="project-title" data-en="Task Management App" data-fa="اپلیکیشن مدیریت وظایف">Task Management App</h3>
+                    <p class="project-desc" data-en="A collaborative project management tool with drag-and-drop Kanban boards, real-time updates via WebSockets, and team analytics. Lorem ipsum dolor sit amet." data-fa="ابزار مدیریت پروژه مشارکتی با برد کانبان کشیدن و رها کردن، به‌روزرسانی بلادرنگ با وب‌سوکت و تحلیل تیمی. لورم ایپسوم متن ساختگی با تولید سادگی.">A collaborative project management tool with drag-and-drop Kanban boards, real-time updates via WebSockets, and team analytics. Lorem ipsum dolor sit amet.</p>
+                    <div class="project-tech">
+                        <span>React</span><span>Socket.io</span><span>MongoDB</span><span>Redis</span>
+                    </div>
+                    <a href="#" class="project-link" data-en="View Project →" data-fa="مشاهده پروژه ←">View Project →</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">03</div>
+                    <h3 class="project-title" data-en="AI Content Generator" data-fa="تولیدکننده محتوای هوشمند">AI Content Generator</h3>
+                    <p class="project-desc" data-en="An AI-powered content generation tool leveraging OpenAI's API for creating blog posts, social media content, and marketing copy. Features include tone customization and multi-language support." data-fa="ابزار تولید محتوا مبتنی بر هوش مصنوعی با استفاده از API اوپن‌ای‌آی برای ایجاد پست‌های وبلاگ، محتوای شبکه‌های اجتماعی و متون تبلیغاتی. شامل شخصی‌سازی لحن و پشتیبانی چندزبانه.">An AI-powered content generation tool leveraging OpenAI's API for creating blog posts, social media content, and marketing copy. Features include tone customization and multi-language support.</p>
+                    <div class="project-tech">
+                        <span>Python</span><span>FastAPI</span><span>React</span><span>OpenAI</span>
+                    </div>
+                    <a href="#" class="project-link" data-en="View Project →" data-fa="مشاهده پروژه ←">View Project →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section class="section">
+            <h2 class="section-title" data-en="Education" data-fa="تحصیلات">Education</h2>
+            <p class="section-subtitle" data-en="academic background" data-fa="سوابق تحصیلی">academic background</p>
+
+            <div class="education-item">
+                <div class="edu-year">2017</div>
+                <div class="edu-details">
+                    <h4 data-en="B.Sc. in Computer Science" data-fa="کارشناسی علوم کامپیوتر">B.Sc. in Computer Science</h4>
+                    <div class="edu-institution" data-en="University of California, Berkeley" data-fa="دانشگاه کالیفرنیا، برکلی">University of California, Berkeley</div>
+                    <div class="edu-desc" data-en="Graduated with Honors. Focus on Software Engineering and Distributed Systems. Senior thesis on optimizing real-time data pipelines." data-fa="فارغ‌التحصیل با رتبه ممتاز. تمرکز بر مهندسی نرم‌افزار و سیستم‌های توزیع‌شده. پایان‌نامه در زمینه بهینه‌سازی خطوط داده بلادرنگ.">Graduated with Honors. Focus on Software Engineering and Distributed Systems. Senior thesis on optimizing real-time data pipelines.</div>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <div class="edu-year">2020</div>
+                <div class="edu-details">
+                    <h4 data-en="M.Sc. in Software Engineering" data-fa="کارشناسی ارشد مهندسی نرم‌افزار">M.Sc. in Software Engineering</h4>
+                    <div class="edu-institution" data-en="Stanford University" data-fa="دانشگاه استنفورد">Stanford University</div>
+                    <div class="edu-desc" data-en="Specialized in Cloud Computing and Machine Learning. Research on serverless architecture patterns for high-availability systems." data-fa="تخصص در رایانش ابری و یادگیری ماشین. پژوهش در زمینه الگوهای معماری بدون سرور برای سیستم‌های با دسترسی‌پذیری بالا.">Specialized in Cloud Computing and Machine Learning. Research on serverless architecture patterns for high-availability systems.</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script>
+    // ===== Language Toggle =====
+    let currentLang = 'en';
+
+    function toggleLang() {
+        currentLang = currentLang === 'en' ? 'fa' : 'en';
+        const html = document.documentElement;
+
+        if (currentLang === 'fa') {
+            html.setAttribute('lang', 'fa');
+            html.setAttribute('dir', 'rtl');
+            document.getElementById('langBtn').textContent = 'English / EN';
+            document.title = 'جان دو — رزومه';
+        } else {
+            html.setAttribute('lang', 'en');
+            html.setAttribute('dir', 'ltr');
+            document.getElementById('langBtn').textContent = 'فارسی / FA';
+            document.title = 'John Doe — Resume';
+        }
+
+        // Update all translatable elements
+        document.querySelectorAll('[data-en]').forEach(el => {
+            const text = el.getAttribute(`data-${currentLang}`);
+            if (text) {
+                if (el.children.length && text.includes('<')) {
+                    el.innerHTML = text;
+                } else if (el.hasAttribute('data-en') && el.innerHTML.includes('<span')) {
+                    el.innerHTML = text;
+                } else {
+                    el.textContent = text;
+                }
+            }
+        });
+
+        // Re-trigger skill bar animation
+        animateSkillBars();
+    }
+
+    // ===== Mobile Sidebar Toggle =====
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.querySelector('.sidebar-overlay');
+        const hamburger = document.querySelector('.hamburger');
+
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('show');
+        hamburger.classList.toggle('active');
+    }
+
+    // ===== Skill Bar Animation =====
+    function animateSkillBars() {
+        const bars = document.querySelectorAll('.skill-bar-fill');
+        bars.forEach(bar => {
+            bar.style.width = '0';
+            setTimeout(() => {
+                bar.style.width = bar.getAttribute('data-width') + '%';
+            }, 100);
+        });
+    }
+
+    // ===== Intersection Observer for Skill Bars =====
+    const skillSection = document.querySelectorAll('.skill-bar-fill');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.width = entry.target.getAttribute('data-width') + '%';
+            }
+        });
+    }, { threshold: 0.3 });
+
+    skillSection.forEach(bar => observer.observe(bar));
+
+    // ===== Initial animation on load =====
+    window.addEventListener('load', () => {
+        setTimeout(animateSkillBars, 600);
+    });
+
+    // ===== Close sidebar on ESC =====
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('open')) {
+                toggleSidebar();
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
