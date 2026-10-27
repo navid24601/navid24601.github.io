@@ -4,913 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navid Shahbazi — Resume</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
-    <style>
-        /* ===== CSS Variables ===== */
-        :root {
-            /* Purple palette */
-            --deep-purple:   #2E073F;
-            --mid-purple:    #540863;
-            --vivid-purple:  #9929EA;
-            --lavender:      #EBD3F8;
-            --white:         #FFFFFF;
-            --black:         #000000;
-
-            /* Semantic tokens */
-            --primary:       var(--deep-purple);
-            --accent:        var(--vivid-purple);
-            --wine:          var(--mid-purple);
-            --light-gray:    #b89ec8;          /* muted lavender-grey for dates/subtitles */
-            --off-white:     #faf5ff;           /* main content background */
-            --bg-sidebar:    var(--deep-purple);
-            --bg-main:       #faf5ff;
-            --text-primary:  var(--deep-purple);
-            --text-light:    #b89ec8;
-            --text-sidebar:  var(--lavender);
-
-            --heading-font:  'Playfair Display', Georgia, serif;
-            --body-font:     'Source Sans 3', 'Segoe UI', sans-serif;
-            --fa-font:       'Vazirmatn', 'Tahoma', sans-serif;
-            --sidebar-width: 320px;
-            --transition:    0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* ===== Reset ===== */
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--body-font);
-            background: var(--bg-main);
-            color: var(--text-primary);
-            line-height: 1.7;
-            font-size: 16.5px;   /* +10% from original 15px */
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ===== RTL Support ===== */
-        html[dir="rtl"] body {
-            font-family: var(--fa-font);
-        }
-        html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3,
-        html[dir="rtl"] .section-title {
-            font-family: var(--fa-font);
-        }
-
-        /* ===== Layout ===== */
-        .page-wrapper {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* ===== Sidebar ===== */
-        .sidebar {
-            width: var(--sidebar-width);
-            background: var(--bg-sidebar);
-            color: var(--text-sidebar);
-            padding: 48px 32px 40px;
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            overflow-y: auto;
-            z-index: 10;
-            transition: transform var(--transition);
-        }
-
-        html[dir="rtl"] .sidebar {
-            left: auto;
-            right: 0;
-        }
-
-        .sidebar::-webkit-scrollbar {
-            width: 4px;
-        }
-        .sidebar::-webkit-scrollbar-thumb {
-            background: rgba(153, 41, 234, 0.45);
-            border-radius: 4px;
-        }
-
-        .profile-section {
-            text-align: center;
-            margin-bottom: 36px;
-        }
-
-        .profile-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--vivid-purple), var(--mid-purple));
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--heading-font);
-            font-size: 40px;
-            font-weight: 900;
-            color: var(--white);
-            letter-spacing: -1px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .profile-avatar::after {
-            content: '';
-            position: absolute;
-            inset: 3px;
-            border-radius: 50%;
-            border: 2px solid rgba(235, 211, 248, 0.2);
-        }
-
-        .sidebar-name {
-            font-family: var(--heading-font);
-            font-size: 24px;    /* +10% from 22px */
-            font-weight: 700;
-            color: var(--white);
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-        }
-
-        html[dir="rtl"] .sidebar-name {
-            font-family: var(--fa-font);
-            letter-spacing: 0;
-        }
-
-        .sidebar-tagline {
-            font-size: 14.5px;   /* +10% from 13px */
-            color: var(--lavender);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        html[dir="rtl"] .sidebar-tagline {
-            letter-spacing: 0;
-            text-transform: none;
-        }
-
-        .sidebar-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(153,41,234,0.5), transparent);
-            margin: 24px 0;
-        }
-
-        .sidebar-section-title {
-            font-size: 12px;    /* +10% from 11px */
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--vivid-purple);
-            margin-bottom: 16px;
-            font-weight: 700;
-        }
-
-        html[dir="rtl"] .sidebar-section-title {
-            letter-spacing: 0;
-            text-transform: none;
-            font-size: 14px;
-        }
-
-        .contact-list {
-            list-style: none;
-            margin-bottom: 8px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 8px 0;
-            font-size: 15px;    /* +10% from 13.5px */
-            color: var(--text-sidebar);
-            transition: color var(--transition);
-        }
-
-        .contact-item:hover {
-            color: var(--lavender);
-        }
-
-        .contact-icon {
-            width: 32px;
-            height: 32px;
-            background: rgba(153, 41, 234, 0.18);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: background var(--transition);
-        }
-
-        .contact-item:hover .contact-icon {
-            background: rgba(153, 41, 234, 0.35);
-        }
-
-        .contact-icon svg {
-            width: 15px;
-            height: 15px;
-            fill: var(--vivid-purple);
-        }
-
-        .contact-item a {
-            color: inherit;
-            text-decoration: none;
-            transition: color var(--transition);
-            word-break: break-all;
-        }
-
-        .contact-item a:hover {
-            color: var(--lavender);
-        }
-
-        .sidebar-languages {
-            margin-top: auto;
-        }
-
-        .language-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 6px 0;
-            font-size: 15px;    /* +10% from 13.5px */
-        }
-
-        .language-level {
-            font-size: 12px;    /* +10% from 11px */
-            color: var(--vivid-purple);
-            font-weight: 600;
-        }
-
-        /* Lang Switch */
-        .lang-switch {
-            margin-top: 24px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: 1.5px solid var(--vivid-purple);
-            color: var(--vivid-purple);
-            padding: 8px 20px;
-            font-size: 13px;    /* +10% from 12px */
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: all var(--transition);
-            font-family: var(--body-font);
-        }
-
-        .lang-btn:hover {
-            background: var(--vivid-purple);
-            color: var(--white);
-        }
-
-        /* ===== Main Content ===== */
-        .main-content {
-            flex: 1;
-            margin-left: var(--sidebar-width);
-            padding: 56px 56px 80px;
-            max-width: 900px;
-        }
-
-        html[dir="rtl"] .main-content {
-            margin-left: 0;
-            margin-right: var(--sidebar-width);
-        }
-
-        /* Section styling */
-        .section {
-            margin-bottom: 52px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        .section:nth-child(1) { animation-delay: 0.1s; }
-        .section:nth-child(2) { animation-delay: 0.2s; }
-        .section:nth-child(3) { animation-delay: 0.3s; }
-        .section:nth-child(4) { animation-delay: 0.4s; }
-        .section:nth-child(5) { animation-delay: 0.5s; }
-        .section:nth-child(6) { animation-delay: 0.6s; }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section-title {
-            font-family: var(--heading-font);
-            font-size: 28.5px;  /* +10% from 26px */
-            font-weight: 900;
-            color: var(--primary);
-            margin-bottom: 6px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background: var(--vivid-purple);
-            border-radius: 2px;
-        }
-
-        html[dir="rtl"] .section-title::after {
-            left: auto;
-            right: 0;
-        }
-
-        .section-subtitle {
-            font-size: 14.5px;  /* +10% from 13px */
-            color: var(--light-gray);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 28px;
-            font-weight: 500;
-        }
-
-        html[dir="rtl"] .section-subtitle {
-            letter-spacing: 0;
-            text-transform: none;
-        }
-
-        /* ===== About / Summary ===== */
-        .about-text {
-            font-size: 17.5px;  /* +10% from 16px */
-            line-height: 1.85;
-            color: #3d1454;
-            max-width: 680px;
-        }
-
-        .about-text .highlight {
-            color: var(--vivid-purple);
-            font-weight: 600;
-        }
-
-        /* ===== Experience Timeline ===== */
-        .timeline {
-            position: relative;
-            padding-left: 28px;
-        }
-
-        html[dir="rtl"] .timeline {
-            padding-left: 0;
-            padding-right: 28px;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 8px;
-            bottom: 8px;
-            width: 2px;
-            background: linear-gradient(180deg, var(--vivid-purple), var(--lavender));
-            border-radius: 2px;
-        }
-
-        html[dir="rtl"] .timeline::before {
-            left: auto;
-            right: 0;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 36px;
-            padding-left: 24px;
-        }
-
-        html[dir="rtl"] .timeline-item {
-            padding-left: 0;
-            padding-right: 24px;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -33px;
-            top: 8px;
-            width: 12px;
-            height: 12px;
-            background: var(--vivid-purple);
-            border-radius: 50%;
-            border: 3px solid var(--bg-main);
-            box-shadow: 0 0 0 2px var(--vivid-purple);
-        }
-
-        html[dir="rtl"] .timeline-item::before {
-            left: auto;
-            right: -33px;
-        }
-
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 6px;
-        }
-
-        .timeline-title {
-            font-family: var(--heading-font);
-            font-size: 20px;    /* +10% from 18px */
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        html[dir="rtl"] .timeline-title {
-            font-family: var(--fa-font);
-        }
-
-        .timeline-company {
-            font-size: 15.5px;  /* +10% from 14px */
-            color: var(--mid-purple);
-            font-weight: 600;
-        }
-
-        .timeline-date {
-            font-size: 13px;    /* +10% from 12px */
-            color: var(--light-gray);
-            font-weight: 600;
-            letter-spacing: 1px;
-            white-space: nowrap;
-        }
-
-        .timeline-desc {
-            font-size: 15.5px;  /* +10% from 14px */
-            color: #4a1a5e;
-            line-height: 1.75;
-        }
-
-        .timeline-desc ul {
-            list-style: none;
-            margin-top: 8px;
-        }
-
-        .timeline-desc ul li {
-            position: relative;
-            padding-left: 16px;
-            margin-bottom: 5px;
-        }
-
-        html[dir="rtl"] .timeline-desc ul li {
-            padding-left: 0;
-            padding-right: 16px;
-        }
-
-        .timeline-desc ul li::before {
-            content: '—';
-            position: absolute;
-            left: 0;
-            color: var(--vivid-purple);
-            font-weight: 700;
-        }
-
-        html[dir="rtl"] .timeline-desc ul li::before {
-            left: auto;
-            right: 0;
-        }
-
-        /* ===== Skills ===== */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-        }
-
-        .skill-category h4 {
-            font-family: var(--heading-font);
-            font-size: 16.5px;  /* +10% from 15px */
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 14px;
-            padding-bottom: 6px;
-            border-bottom: 1px solid rgba(46, 7, 63, 0.12);
-        }
-
-        html[dir="rtl"] .skill-category h4 {
-            font-family: var(--fa-font);
-        }
-
-        .skill-bar-item {
-            margin-bottom: 12px;
-        }
-
-        .skill-bar-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14.5px;  /* +10% from 13px */
-            font-weight: 500;
-            margin-bottom: 5px;
-            color: #4a1a5e;
-        }
-
-        .skill-bar-track {
-            height: 6px;
-            background: rgba(46, 7, 63, 0.08);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .skill-bar-fill {
-            height: 100%;
-            border-radius: 3px;
-            background: linear-gradient(90deg, var(--vivid-purple), var(--mid-purple));
-            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 0;
-        }
-
-        html[dir="rtl"] .skill-bar-fill {
-            background: linear-gradient(270deg, var(--vivid-purple), var(--mid-purple));
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .skill-tag {
-            background: rgba(153, 41, 234, 0.07);
-            border: 1px solid rgba(153, 41, 234, 0.18);
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 14px;    /* +10% from 12.5px */
-            font-weight: 500;
-            color: var(--mid-purple);
-            transition: all var(--transition);
-        }
-
-        .skill-tag:hover {
-            background: var(--vivid-purple);
-            color: var(--white);
-            border-color: var(--vivid-purple);
-            transform: translateY(-1px);
-        }
-
-        /* ===== Projects ===== */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-
-        .project-card {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 28px;
-            border: 1px solid rgba(153, 41, 234, 0.1);
-            transition: all var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--vivid-purple), var(--mid-purple));
-            transform: scaleX(0);
-            transition: transform var(--transition);
-            transform-origin: left;
-        }
-
-        html[dir="rtl"] .project-card::before {
-            transform-origin: right;
-        }
-
-        .project-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(153, 41, 234, 0.12);
-        }
-
-        .project-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .project-number {
-            font-family: var(--heading-font);
-            font-size: 40px;    /* +10% from 36px */
-            font-weight: 900;
-            color: rgba(153, 41, 234, 0.06);
-            margin-bottom: 8px;
-            line-height: 1;
-        }
-
-        .project-title {
-            font-family: var(--heading-font);
-            font-size: 18.5px;  /* +10% from 17px */
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-
-        html[dir="rtl"] .project-title {
-            font-family: var(--fa-font);
-        }
-
-        .project-desc {
-            font-size: 15px;    /* +10% from 13.5px */
-            color: #4a1a5e;
-            line-height: 1.7;
-            margin-bottom: 14px;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .project-tech span {
-            font-size: 12px;    /* +10% from 11px */
-            font-weight: 600;
-            color: var(--mid-purple);
-            background: rgba(84, 8, 99, 0.08);
-            padding: 3px 10px;
-            border-radius: 12px;
-        }
-
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 14px;    /* +10% from 12.5px */
-            font-weight: 600;
-            color: var(--vivid-purple);
-            text-decoration: none;
-            margin-top: 12px;
-            transition: gap var(--transition);
-        }
-
-        .project-link:hover {
-            gap: 8px;
-        }
-
-        .project-link svg {
-            width: 14px;
-            height: 14px;
-            fill: var(--vivid-purple);
-        }
-
-        /* ===== Education ===== */
-        .education-item {
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-            margin-bottom: 28px;
-            padding: 20px 24px;
-            background: var(--white);
-            border-radius: 10px;
-            border: 1px solid rgba(153, 41, 234, 0.09);
-            transition: box-shadow var(--transition);
-        }
-
-        .education-item:hover {
-            box-shadow: 0 6px 24px rgba(153, 41, 234, 0.1);
-        }
-
-        .edu-year {
-            font-family: var(--heading-font);
-            font-size: 31px;    /* +10% from 28px */
-            font-weight: 900;
-            color: rgba(153, 41, 234, 0.18);
-            white-space: nowrap;
-            line-height: 1.2;
-        }
-
-        .edu-details h4 {
-            font-family: var(--heading-font);
-            font-size: 17.5px;  /* +10% from 16px */
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 2px;
-        }
-
-        html[dir="rtl"] .edu-details h4 {
-            font-family: var(--fa-font);
-        }
-
-        .edu-details .edu-institution {
-            font-size: 15px;    /* +10% from 13.5px */
-            color: var(--mid-purple);
-            font-weight: 600;
-        }
-
-        .edu-details .edu-desc {
-            font-size: 14.5px;  /* +10% from 13px */
-            color: #7a4890;
-            margin-top: 4px;
-        }
-
-        /* ===== Mobile Menu Toggle ===== */
-        .mobile-header {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 60px;
-            background: var(--deep-purple);
-            z-index: 20;
-            align-items: center;
-            justify-content: flex-end;   /* right-aligned since name is removed */
-            padding: 0 20px;
-        }
-
-        /* .mobile-name intentionally removed — no name shown in mobile header */
-
-        .hamburger {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        .hamburger span {
-            display: block;
-            width: 22px;
-            height: 2px;
-            background: var(--lavender);
-            margin: 5px 0;
-            border-radius: 2px;
-            transition: all var(--transition);
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(46, 7, 63, 0.55);
-            z-index: 9;
-        }
-
-        /* ===== Responsive ===== */
-        @media (max-width: 900px) {
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .mobile-header {
-                display: flex;
-            }
-
-            .sidebar {
-                transform: translateX(-100%);
-                width: 300px;
-            }
-
-            html[dir="rtl"] .sidebar {
-                transform: translateX(100%);
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .sidebar-overlay.show {
-                display: block;
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 80px 24px 60px;
-            }
-
-            html[dir="rtl"] .main-content {
-                margin-right: 0;
-            }
-
-            .section-title {
-                font-size: 24px;
-            }
-
-            .timeline-header {
-                flex-direction: column;
-                gap: 2px;
-            }
-
-            .education-item {
-                flex-direction: column;
-                gap: 8px;
-            }
-        }
-
-        /* ===== Print Styles ===== */
-        @media print {
-            * {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            body {
-                font-size: 11px;
-                line-height: 1.5;
-            }
-
-            .page-wrapper {
-                display: grid;
-                grid-template-columns: 240px 1fr;
-            }
-
-            .sidebar {
-                position: relative;
-                width: 240px;
-                height: auto;
-                padding: 28px 20px;
-                break-inside: avoid;
-            }
-
-            .mobile-header,
-            .sidebar-overlay,
-            .lang-switch {
-                display: none !important;
-            }
-
-            .main-content {
-                margin: 0;
-                padding: 28px 32px;
-            }
-
-            .section {
-                opacity: 1;
-                transform: none;
-                animation: none;
-                margin-bottom: 24px;
-                break-inside: avoid;
-            }
-
-            .project-card, .education-item {
-                box-shadow: none;
-                border: 1px solid #ddd;
-            }
-
-            .project-card:hover, .education-item:hover {
-                transform: none;
-                box-shadow: none;
-            }
-
-            .section-title {
-                font-size: 18px;
-            }
-
-            .about-text {
-                font-size: 12px;
-            }
-
-            .profile-avatar {
-                width: 80px;
-                height: 80px;
-                font-size: 28px;
-            }
-
-            .sidebar-name {
-                font-size: 18px;
-            }
-
-            .skill-bar-fill {
-                width: var(--fill) !important;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
@@ -926,9 +20,13 @@
     <!-- ===== SIDEBAR ===== -->
     <aside class="sidebar" id="sidebar">
         <div class="profile-section">
-            <div class="profile-avatar">🌅</div>
+            <div class="profile-avatar">NS</div>
             <h1 class="sidebar-name" data-en="Navid Shahbazi" data-fa="نوید شهبازی">Navid Shahbazi</h1>
             <p class="sidebar-tagline" data-en="Python and JavaScript Developer" data-fa="توسعه‌دهنده پایتون و جاوااسکریپت">Python and JavaScript Developer</p>
+        </div>
+
+        <div class="lang-switch">
+            <button class="lang-btn" id="langBtn" onclick="toggleLang()">فارسی / FA</button>
         </div>
 
         <div class="sidebar-divider"></div>
@@ -939,7 +37,7 @@
                 <span class="contact-icon">
                     <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                 </span>
-                <a href="mailto:navid@example.com">navid@example.com</a>
+                <a href="mailto:shahbazynavid7@gmail.com">shahbazynavid7@gmail.com</a>
             </li>
             <li class="contact-item">
                 <span class="contact-icon">
@@ -949,9 +47,9 @@
             </li>
             <li class="contact-item">
                 <span class="contact-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.607-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                 </span>
-                <a href="https://github.com/navidshahbazi" target="_blank">github.com/navidshahbazi</a>
+                <a href="https://github.com/navid24601" target="_blank">github.com/navid24601</a>
             </li>
             <li class="contact-item">
                 <span class="contact-icon">
@@ -972,12 +70,6 @@
             <span data-en="Persian" data-fa="فارسی">Persian</span>
             <span class="language-level" data-en="Native" data-fa="زبان مادری">Native</span>
         </div>
-
-        <div class="sidebar-divider"></div>
-
-        <div class="lang-switch">
-            <button class="lang-btn" id="langBtn" onclick="toggleLang()">فارسی / FA</button>
-        </div>
     </aside>
 
     <!-- ===== MAIN CONTENT ===== -->
@@ -985,65 +77,70 @@
 
         <!-- About Me -->
         <section class="section">
-            <h2 class="section-title" data-en="About Me" data-fa="درباره من">About Me</h2>
-            <p class="section-subtitle" data-en="who i am" data-fa="معرفی">who i am</p>
-            <p class="about-text" data-en="A passionate <span class='highlight'>Full-Stack Developer</span> with 7+ years of experience designing and building scalable web applications. Skilled in modern JavaScript frameworks, cloud architecture, and creating intuitive user experiences. Committed to writing clean, maintainable code and continuously learning emerging technologies. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore." data-fa="یک <span class='highlight'>توسعه‌دهنده فول‌استک</span> با بیش از ۷ سال تجربه در طراحی و ساخت اپلیکیشن‌های وب مقیاس‌پذیر. متخصص در فریمورک‌های مدرن جاوااسکریپت، معماری ابری و ایجاد تجربه‌های کاربری بصری. متعهد به نوشتن کد تمیز و قابل نگهداری و یادگیری مستمر فناوری‌های جدید. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و طراحی گرافیک.">A passionate <span class="highlight">Full-Stack Developer</span> with 7+ years of experience designing and building scalable web applications. Skilled in modern JavaScript frameworks, cloud architecture, and creating intuitive user experiences. Committed to writing clean, maintainable code and continuously learning emerging technologies. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+            <h2 class="section-title" data-en="About Me" data-fa="دربارۀ من">About Me</h2>
+            <p class="section-subtitle" data-en="who i am" data-fa="من که هستم">who i am</p>
+            <p class="about-text" data-en="I love <span class='highlight'>creating tools and workflows to solve real-world problems and make life easier</span>. I'm skilled in Python libraries, modern JavaScript frameworks, cloud architecture, working with Linux-based and Windows systems, and creating intuitive user experiences. I'm committed to writing clean code that's understandable and reusable by my future self and my teammates." data-fa="من عاشق <span class='highlight'>خلق کردن ابزار و جریان‌کاری برای حل مشکلات واقعی و آسان‌تر کردن زندگی</span> هستم. من در کار با کتابخانه‌های کاربردی پایتون، فریمورک‌های مدرن جاوااسکریپت، معماری ابری، سیستم‌های لینوکسی و ویندوزی و خلق رابط کاربری خوش‌دست، حرفه‌ای هستم.">I love <span class='highlight'>creating tools and workflows to solve real-world problems and make life easier</span>. I'm skilled in Python libraries, modern JavaScript frameworks, cloud architecture, working with Linux-based and Windows systems, and creating intuitive user experiences. I'm committed to writing clean code that's understandable and reusable by my future self and my teammates.</p>
         </section>
 
-        <!-- Experience -->
+        <!-- Projects -->
         <section class="section">
-            <h2 class="section-title" data-en="Experience" data-fa="سوابق کاری">Experience</h2>
-            <p class="section-subtitle" data-en="where i've worked" data-fa="سابقه حرفه‌ای">where i've worked</p>
+            <h2 class="section-title" data-en="Projects" data-fa="پروژه‌ها">Projects</h2>
+            <p class="section-subtitle" data-en="what i've made" data-fa="چه چیزهایی ساخته‌ام">what i've made</p>
 
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-header">
-                        <div>
-                            <div class="timeline-title" data-en="Senior Full-Stack Developer" data-fa="توسعه‌دهنده ارشد فول‌استک">Senior Full-Stack Developer</div>
-                            <div class="timeline-company" data-en="TechCorp Solutions" data-fa="شرکت تک‌کورپ سولوشنز">TechCorp Solutions</div>
-                        </div>
-                        <span class="timeline-date" data-en="Jan 2022 — Present" data-fa="ژانویه ۲۰۲۲ — اکنون">Jan 2022 — Present</span>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-number">#1</div>
+                    <h3 class="project-title" data-en="Price Alert Bot" data-fa="ربات هشدار قیمت">Price Alert Bot</h3>
+                    <p class="project-desc" data-en="A useful automation tool that notifies the user of the changes and certain price targets of chosen assests." data-fa="یک ابزار خودکارسازی که کاربر را از تغییرات قیمت و قیمت‌های تعیین‌شده برای دارایی‌های انتخابی با خبر می‌کند.">A useful automation tool that notifies the user of the changes and certain price targets of chosen assests.</p>
+                    <div class="project-tech">
+                        <span>Python</span><span>Telegram</span>
                     </div>
-                    <div class="timeline-desc">
-                        <ul>
-                            <li data-en="Led a team of 5 developers to build a real-time analytics dashboard serving 50K+ users, improving data retrieval speed by 40%." data-fa="رهبری تیم ۵ نفره توسعه‌دهنده برای ساخت داشبورد تحلیلی بلادرنگ با بیش از ۵۰ هزار کاربر و بهبود ۴۰ درصدی سرعت بازیابی داده.">Led a team of 5 developers to build a real-time analytics dashboard serving 50K+ users, improving data retrieval speed by 40%.</li>
-                            <li data-en="Architected a microservices backend using Node.js and PostgreSQL, reducing server costs by 30%." data-fa="طراحی معماری میکروسرویس بک‌اند با Node.js و PostgreSQL و کاهش ۳۰ درصدی هزینه‌های سرور.">Architected a microservices backend using Node.js and PostgreSQL, reducing server costs by 30%.</li>
-                            <li data-en="Implemented CI/CD pipelines with GitHub Actions, cutting deployment time from 2 hours to 15 minutes." data-fa="پیاده‌سازی خطوط CI/CD با GitHub Actions و کاهش زمان استقرار از ۲ ساعت به ۱۵ دقیقه.">Implemented CI/CD pipelines with GitHub Actions, cutting deployment time from 2 hours to 15 minutes.</li>
-                        </ul>
-                    </div>
+                    <a href="http://navid24601.ir/TelegramPriceBot.zip" class="project-link" data-en="Download Project →" data-fa="دانلود پروژه ←">Download Project →</a>
                 </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-header">
-                        <div>
-                            <div class="timeline-title" data-en="Frontend Developer" data-fa="توسعه‌دهنده فرانت‌اند">Frontend Developer</div>
-                            <div class="timeline-company" data-en="Digital Agency XYZ" data-fa="آژانس دیجیتال XYZ">Digital Agency XYZ</div>
-                        </div>
-                        <span class="timeline-date" data-en="Mar 2019 — Dec 2021" data-fa="مارس ۲۰۱۹ — دسامبر ۲۰۲۱">Mar 2019 — Dec 2021</span>
+                <div class="project-card">
+                    <div class="project-number">#2</div>
+                    <h3 class="project-title" data-en="BatchForge (Batch Image Editor)" data-fa="بَچ‌فورج (ویرایش انبوه تصویر)">BatchForge (Batch Image Editor)</h3>
+                    <p class="project-desc" data-en="An online tool that makes doing simple edits on multiple images very easy and smooth." data-fa="یک ابزار آنلاین که انجام ویرایش‌های ساده بر روی تصاویر به صورت انبوه را به شدت آسان و روان می‌کند.">An online tool that makes doing simple edits on multiple images very easy and smooth.</p>
+                    <div class="project-tech">
+                        <span>JavaScript</span><span>HTML/CSS</span>
                     </div>
-                    <div class="timeline-desc">
-                        <ul>
-                            <li data-en="Developed responsive web applications for 20+ clients using React and TypeScript." data-fa="توسعه اپلیکیشن‌های وب واکنش‌گرا برای بیش از ۲۰ مشتری با React و TypeScript.">Developed responsive web applications for 20+ clients using React and TypeScript.</li>
-                            <li data-en="Optimized web performance resulting in 60% improvement in Lighthouse scores across all projects." data-fa="بهینه‌سازی عملکرد وب با بهبود ۶۰ درصدی امتیاز Lighthouse در تمامی پروژه‌ها.">Optimized web performance resulting in 60% improvement in Lighthouse scores across all projects.</li>
-                            <li data-en="Mentored 3 junior developers, conducting weekly code reviews and pair programming sessions." data-fa="راهنمایی ۳ توسعه‌دهنده جونیور با برگزاری جلسات بازبینی کد و برنامه‌نویسی دونفره هفتگی.">Mentored 3 junior developers, conducting weekly code reviews and pair programming sessions.</li>
-                        </ul>
-                    </div>
+                    <a href="http://navid24601.ir/BatchForge/index.html" class="project-link" data-en="View Project →" data-fa="مشاهده پروژه ←">View Project →</a>
                 </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-header">
-                        <div>
-                            <div class="timeline-title" data-en="Junior Web Developer" data-fa="توسعه‌دهنده وب جونیور">Junior Web Developer</div>
-                            <div class="timeline-company" data-en="StartUp Labs" data-fa="استارت‌آپ لبز">StartUp Labs</div>
-                        </div>
-                        <span class="timeline-date" data-en="Jun 2017 — Feb 2019" data-fa="ژوئن ۲۰۱۷ — فوریه ۲۰۱۹">Jun 2017 — Feb 2019</span>
+                <div class="project-card">
+                    <div class="project-number">#3</div>
+                    <h3 class="project-title" data-en="Markdown2HTML" data-fa="مبدل مارکداون به HTML">Markdown2HTML</h3>
+                    <p class="project-desc" data-en="A simple and easy to use Markdown to HTML and HTML to Markdown converter." data-fa="یک مبدل مارکدان به HTML ساده و کاربرپسند.">A simple and easy to use Markdown to HTML and HTML to Markdown converter.</p>
+                    <div class="project-tech">
+                        <span>JavaScript</span><span>HTML/CSS</span>
                     </div>
-                    <div class="timeline-desc">
-                        <ul>
-                            <li data-en="Built and maintained company website and internal tools using HTML, CSS, JavaScript, and PHP." data-fa="ساخت و نگهداری وب‌سایت شرکت و ابزارهای داخلی با HTML، CSS، JavaScript و PHP.">Built and maintained company website and internal tools using HTML, CSS, JavaScript, and PHP.</li>
-                            <li data-en="Collaborated with the design team to implement pixel-perfect UI components." data-fa="همکاری با تیم طراحی برای پیاده‌سازی کامپوننت‌های UI با دقت پیکسلی.">Collaborated with the design team to implement pixel-perfect UI components.</li>
-                        </ul>
+                    <a href="http://navid24601.ir/Markdown2HTML/index.html" class="project-link" data-en="View Project →" data-fa="مشاهده پروژه ←">View Project →</a>
+                </div>
+                <div class="project-card">
+                    <div class="project-number">#4</div>
+                    <h3 class="project-title" data-en="Textify (Text Editor & Converter)" data-fa="تکستیفای (ویرایشگر و مبدل متن)">Textify (Text Editor & Converter)</h3>
+                    <p class="project-desc" data-en="A user-friendly and handy text editor and converter. Case conversion, white space removal, encryption/decryption, etc." data-fa="یک ویرایشگر و مبدل متن کاربردی و کاربرپسند. تبدیل حروف، حذف فضای سفید متن، رمزگذاری و رمزگشایی و غیره.">A user-friendly and handy text editor and converter. Case conversion, white space removal, encryption/decryption, etc.</p>
+                    <div class="project-tech">
+                        <span>JavaScript</span><span>HTML/CSS</span>
                     </div>
+                    <a href="http://navid24601.ir/Textify/index.html" class="project-link" data-en="View Project →" data-fa="مشاهده پروژه ←">View Project →</a>
+                </div>
+                <div class="project-card">
+                    <div class="project-number">#5</div>
+                    <h3 class="project-title" data-en="SubSync (Subtitle Synching)" data-fa="ساب‌سینک (همگام‌سازی زیرنویس)">SubSync (Subtitle Synching)</h3>
+                    <p class="project-desc" data-en="An online tool that facilitates and somewhat automates the fixing, renaming, and synching of subtitles (.srt, .sub, .ass, .vtt) in single or batch operations." data-fa="یک ابزار آنلاین که تعمیر، هم‌نام‌سازی و همگام‌سازی فایل‌های زیرنویس را آسان و تا حدودی خودکار می‌کند.">An online tool that facilitates and somewhat automates the fixing, renaming, and synching of subtitles (.srt, .sub, .ass, .vtt) in single or batch operations</p>
+                    <div class="project-tech">
+                        <span>JavaScript</span><span>HTML/CSS</span>
+                    </div>
+                    <a href="http://navid24601.ir/SubSync/index.html" class="project-link" data-en="View Project →" data-fa="مشاهده پروژه ←">View Project →</a>
+                </div>
+                <div class="project-card">
+                    <div class="project-number">#6</div>
+                    <h3 class="project-title" data-en="SpeakerQueue (Name-keeping and Turn-taking)" data-fa="اسپیکرکیو (نگهداری نام‌ها و نوبت‌دهی)">SpeakerQueue (Name-keeping and Turn-taking)</h3>
+                    <p class="project-desc" data-en="A passion project born out of my need to remember lots of names and order of names in a semi-formal gathering." data-fa="یک پروژه دلی که از نیاز من برای یادسپاری فهرست نام‌ها و ترتیب نام‌های افراد داوطلب در یک دورهمی نیمه‌رسمی آغاز شد.">A passion project born out of my need to remember lots of names and order of names in a semi-formal gathering.</p>
+                    <div class="project-tech">
+                        <span>JavaScript</span><span>HTML/CSS</span>
+                    </div>
+                    <a href="http://navid24601.ir/SpeakerQueue/index.html" class="project-link" data-en="View Project →" data-fa="مشاهده پروژه ←">View Project →</a>
                 </div>
             </div>
         </section>
@@ -1051,101 +148,93 @@
         <!-- Skills -->
         <section class="section">
             <h2 class="section-title" data-en="Skills" data-fa="مهارت‌ها">Skills</h2>
-            <p class="section-subtitle" data-en="what i'm good at" data-fa="توانمندی‌ها">what i'm good at</p>
+            <p class="section-subtitle" data-en="what i'm good at" data-fa="چه کارهایی می‌توانم انجام بدهم">what i'm good at</p>
 
             <div class="skills-grid">
                 <div class="skill-category">
                     <h4 data-en="Frontend" data-fa="فرانت‌اند">Frontend</h4>
                     <div class="skill-bar-item">
-                        <div class="skill-bar-label"><span>JavaScript</span><span>25%</span></div>
-                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="25" style="--fill:25%"></div></div>
+                        <div class="skill-bar-label"><span>HTML / CSS </span><span>60%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="60" style="--fill:60%"></div></div>
                     </div>
                     <div class="skill-bar-item">
-                        <div class="skill-bar-label"><span>TypeScript</span><span>0%</span></div>
-                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="0" style="--fill:0%"></div></div>
-                    </div>
-                    <div class="skill-bar-item">
-                        <div class="skill-bar-label"><span>HTML / CSS</span><span>50%</span></div>
-                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="0" style="--fill:50%"></div></div>
+                        <div class="skill-bar-label"><span>JavaScript</span><span>30%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="30" style="--fill:30%"></div></div>
                     </div>
                 </div>
 
                 <div class="skill-category">
                     <h4 data-en="Backend" data-fa="بک‌اند">Backend</h4>
                     <div class="skill-bar-item">
-                        <div class="skill-bar-label"><span>Python</span><span>50%</span></div>
+                        <div class="skill-bar-label"><span>Python / Django / FastAPI</span><span>50%</span></div>
                         <div class="skill-bar-track"><div class="skill-bar-fill" data-width="50" style="--fill:50%"></div></div>
                     </div>
                     <div class="skill-bar-item">
-                        <div class="skill-bar-label"><span>Node.js</span><span>0%</span></div>
-                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="0" style="--fill:0%"></div></div>
-                    </div>
-                    <div class="skill-bar-item">
-                        <div class="skill-bar-label"><span>PostgreSQL / MongoDB</span><span>0%</span></div>
-                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="0" style="--fill:0%"></div></div>
+                        <div class="skill-bar-label"><span>PHP</span><span>20%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="20" style="--fill:20%"></div></div>
                     </div>
                 </div>
 
                 <div class="skill-category">
-                    <h4 data-en="DevOps & Tools" data-fa="دوآپس و ابزارها">DevOps & Tools</h4>
+                    <h4 data-en="Other Technical Skills & Tools" data-fa="دیگر مهارت‌های فنی و ابزارها">Other Technical Skills & Tools</h4>
                     <div class="skill-tags">
-                        <span class="skill-tag">Git and Github</span>
                         <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Kubernetes</span>
-                        <span class="skill-tag">AWS</span>
-                        <span class="skill-tag">GitHub Actions</span>
-                        <span class="skill-tag">Terraform</span>
-                        <span class="skill-tag">Nginx</span>
+                        <span class="skill-tag">Linux (Ubuntu)</span>
+                        <span class="skill-tag">Bash & PowerShell</span>
+                        <span class="skill-tag">Git & GitHub</span>
+                        <span class="skill-tag">Prompt Engineering</span>
                     </div>
                 </div>
 
                 <div class="skill-category">
                     <h4 data-en="Soft Skills" data-fa="مهارت‌های نرم">Soft Skills</h4>
                     <div class="skill-tags">
-                        <span class="skill-tag" data-en="Teamwork" data-fa="کار تیمی">Teamwork</span>
+                        <span class="skill-tag" data-en="Teamwork" data-fa="کار گروهی">Teamwork</span>
+                        <span class="skill-tag" data-en="Compatibility" data-fa="سازگاری">Compatibility</span>
                         <span class="skill-tag" data-en="Problem Solving" data-fa="حل مسئله">Problem Solving</span>
                         <span class="skill-tag" data-en="Communication" data-fa="ارتباطات">Communication</span>
-                        <span class="skill-tag" data-en="Adaptability" data-fa="انطباق‌پذیری">Adaptability</span>
-                        <span class="skill-tag" data-en="Critical Thinking" data-fa="تفکر نقادانه">Critical Thinking</span>
+                        <span class="skill-tag" data-en="Art of Apprenticeship" data-fa="هنر شاگردی">Art of Apprenticeship</span>
+                        <span class="skill-tag" data-en="Learning and Teaching" data-fa="یادگیری و تدریس">Learning and Teaching</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Projects -->
+        <!-- Experience -->
         <section class="section">
-            <h2 class="section-title" data-en="Projects" data-fa="پروژه‌ها">Projects</h2>
-            <p class="section-subtitle" data-en="selected work" data-fa="نمونه کارها">selected work</p>
+            <h2 class="section-title" data-en="Experience" data-fa="سابقه کاری">Experience</h2>
+            <p class="section-subtitle" data-en="where i've worked" data-fa="چه کارهایی کرده‌ام">where i've worked</p>
 
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-number">01</div>
-                    <h3 class="project-title" data-en="E-Commerce Platform" data-fa="پلتفرم تجارت الکترونیک">E-Commerce Platform</h3>
-                    <p class="project-desc" data-en="A full-featured e-commerce platform with real-time inventory management, payment integration, and admin dashboard. Built for scalability handling 10K+ concurrent users." data-fa="یک پلتفرم تجارت الکترونیک کامل با مدیریت موجودی بلادرنگ، یکپارچه‌سازی پرداخت و داشبورد مدیریت. طراحی شده برای مقیاس‌پذیری و مدیریت بیش از ۱۰ هزار کاربر همزمان.">A full-featured e-commerce platform with real-time inventory management, payment integration, and admin dashboard. Built for scalability handling 10K+ concurrent users.</p>
-                    <div class="project-tech">
-                        <span>Next.js</span><span>Node.js</span><span>Stripe</span><span>PostgreSQL</span>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="timeline-title" data-en="Admin & Technical Support" data-fa="ادمین و پشتیبان فنی سایت">Admin & Technical Support</div>
+                            <div class="timeline-company" data-en="Mochachillo.com" data-fa="فروشگاه قهوه موکاچیلو">Mochachillo.com</div>
+                        </div>
+                        <span class="timeline-date" data-en="Dec 2025 — Present" data-fa="آذر 1404 — اکنون">Dec 2025 — Present</span>
                     </div>
-                    <a href="#" class="project-link" data-en="View Project →" data-fa="مشاهده پروژه ←">View Project →</a>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li data-en="Managing a Wordpress/WooCommerce-based online coffee retailer." data-fa="مدیریت یک فروشگاه آنلاین خرده‌فروشی قهوه بر پایه وردپرس و ووکامرس">Managing a Wordpress/WooCommerce-based online coffee retailer.</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-number">02</div>
-                    <h3 class="project-title" data-en="Task Management App" data-fa="اپلیکیشن مدیریت وظایف">Task Management App</h3>
-                    <p class="project-desc" data-en="A collaborative project management tool with drag-and-drop Kanban boards, real-time updates via WebSockets, and team analytics. Lorem ipsum dolor sit amet." data-fa="ابزار مدیریت پروژه مشارکتی با برد کانبان کشیدن و رها کردن، به‌روزرسانی بلادرنگ با وب‌سوکت و تحلیل تیمی. لورم ایپسوم متن ساختگی با تولید سادگی.">A collaborative project management tool with drag-and-drop Kanban boards, real-time updates via WebSockets, and team analytics. Lorem ipsum dolor sit amet.</p>
-                    <div class="project-tech">
-                        <span>React</span><span>Socket.io</span><span>MongoDB</span><span>Redis</span>
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="timeline-title" data-en="Admin & Technical Support" data-fa="ادمین و پشتیبان فنی سایت">Admin & Technical Support</div>
+                            <div class="timeline-company" data-en="IranFluent.com" data-fa="سایت آموزش زبان ایران فلوئنت">IranFluent.com</div>
+                        </div>
+                        <span class="timeline-date" data-en="Sep 2021 — Aug 2022" data-fa="مهر 1400 — شهریور 1401">Sep 2021 — Aug 2022</span>
                     </div>
-                    <a href="#" class="project-link" data-en="View Project →" data-fa="مشاهده پروژه ←">View Project →</a>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-number">03</div>
-                    <h3 class="project-title" data-en="AI Content Generator" data-fa="تولیدکننده محتوای هوشمند">AI Content Generator</h3>
-                    <p class="project-desc" data-en="An AI-powered content generation tool leveraging OpenAI's API for creating blog posts, social media content, and marketing copy. Features include tone customization and multi-language support." data-fa="ابزار تولید محتوا مبتنی بر هوش مصنوعی با استفاده از API اوپن‌ای‌آی برای ایجاد پست‌های وبلاگ، محتوای شبکه‌های اجتماعی و متون تبلیغاتی. شامل شخصی‌سازی لحن و پشتیبانی چندزبانه.">An AI-powered content generation tool leveraging OpenAI's API for creating blog posts, social media content, and marketing copy. Features include tone customization and multi-language support.</p>
-                    <div class="project-tech">
-                        <span>Python</span><span>FastAPI</span><span>React</span><span>OpenAI</span>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li data-en="Managing a Wordpress-based educational website for English learners" data-fa="مدیریت یک سایت آموزشی بر پایه وردپرس برای یادگیرندگان زبان انگلیسی">Managing a Wordpress-based educational website for English learners</li>
+                            <li data-en="Testing and providing detailed reports on the functionality of various website components." data-fa="آزمایش و تهیه گزارش دقیق برای بخش‌های مختلف وبسایت">Testing and providing detailed reports on the functionality of various website components.</li>
+                        </ul>
                     </div>
-                    <a href="#" class="project-link" data-en="View Project →" data-fa="مشاهده پروژه ←">View Project →</a>
                 </div>
             </div>
         </section>
@@ -1153,116 +242,28 @@
         <!-- Education -->
         <section class="section">
             <h2 class="section-title" data-en="Education" data-fa="تحصیلات">Education</h2>
-            <p class="section-subtitle" data-en="academic background" data-fa="سوابق تحصیلی">academic background</p>
+            <p class="section-subtitle" data-en="what i've studied" data-fa="چه خوانده‌ام">what i've studied</p>
 
             <div class="education-item">
-                <div class="edu-year">2017</div>
+                <div class="edu-year">2026</div>
                 <div class="edu-details">
-                    <h4 data-en="B.Sc. in Computer Science" data-fa="کارشناسی علوم کامپیوتر">B.Sc. in Computer Science</h4>
-                    <div class="edu-institution" data-en="University of California, Berkeley" data-fa="دانشگاه کالیفرنیا، برکلی">University of California, Berkeley</div>
-                    <div class="edu-desc" data-en="Graduated with Honors. Focus on Software Engineering and Distributed Systems. Senior thesis on optimizing real-time data pipelines." data-fa="فارغ‌التحصیل با رتبه ممتاز. تمرکز بر مهندسی نرم‌افزار و سیستم‌های توزیع‌شده. پایان‌نامه در زمینه بهینه‌سازی خطوط داده بلادرنگ.">Graduated with Honors. Focus on Software Engineering and Distributed Systems. Senior thesis on optimizing real-time data pipelines.</div>
+                    <h4 data-en="B.A. in TEFL" data-fa="کارشناسی آموزش زبان انگلیسی">B.A. in TEFL</h4>
+                    <div class="edu-institution" data-en="Islamic Azad University, Central Tehran Branch" data-fa="دانشگاه آزاد اسلامی واحد تهران مرکزی">Islamic Azad University, Central Tehran Branch</div>
+                    <div class="edu-desc" data-en="Graduated with Honors." data-fa="فارغ‌التحصیل با رتبه ممتاز.">Graduated with Honors.</div>
                 </div>
             </div>
 
             <div class="education-item">
-                <div class="edu-year">2020</div>
+                <div class="edu-year">2021</div>
                 <div class="edu-details">
-                    <h4 data-en="M.Sc. in Software Engineering" data-fa="کارشناسی ارشد مهندسی نرم‌افزار">M.Sc. in Software Engineering</h4>
-                    <div class="edu-institution" data-en="Stanford University" data-fa="دانشگاه استنفورد">Stanford University</div>
-                    <div class="edu-desc" data-en="Specialized in Cloud Computing and Machine Learning. Research on serverless architecture patterns for high-availability systems." data-fa="تخصص در رایانش ابری و یادگیری ماشین. پژوهش در زمینه الگوهای معماری بدون سرور برای سیستم‌های با دسترسی‌پذیری بالا.">Specialized in Cloud Computing and Machine Learning. Research on serverless architecture patterns for high-availability systems.</div>
+                    <h4 data-en="Diploma in Network & Software" data-fa="دیپلم شبکه و نرم‌افزار">Diploma in Network & Software</h4>
+                    <div class="edu-institution" data-en="Quds Technical High School" data-fa="هنرستان قدس">Quds Technical High School</div>
+                    <div class="edu-desc" data-en="Learned about how computers and networks work. Worked with C#, HTML, CSS, and PHP." data-fa="یادگیری درباره نحوه کار کامپیوتر و شبکه. کار با سی شارپ، HTML، CSS، و PHP.">Learned about how computers and networks work. Worked with C#, HTML, CSS, and PHP.</div>
                 </div>
             </div>
         </section>
-
     </main>
 </div>
-
-<script>
-    // ===== Language Toggle =====
-    let currentLang = 'en';
-
-    function toggleLang() {
-        currentLang = currentLang === 'en' ? 'fa' : 'en';
-        const html = document.documentElement;
-
-        if (currentLang === 'fa') {
-            html.setAttribute('lang', 'fa');
-            html.setAttribute('dir', 'rtl');
-            document.getElementById('langBtn').textContent = 'English / EN';
-            document.title = 'نوید شهبازی — رزومه';
-        } else {
-            html.setAttribute('lang', 'en');
-            html.setAttribute('dir', 'ltr');
-            document.getElementById('langBtn').textContent = 'فارسی / FA';
-            document.title = 'Navid Shahbazi — Resume';
-        }
-
-        // Update all translatable elements
-        document.querySelectorAll('[data-en]').forEach(el => {
-            const text = el.getAttribute(`data-${currentLang}`);
-            if (text) {
-                if (el.children.length && text.includes('<')) {
-                    el.innerHTML = text;
-                } else if (el.hasAttribute('data-en') && el.innerHTML.includes('<span')) {
-                    el.innerHTML = text;
-                } else {
-                    el.textContent = text;
-                }
-            }
-        });
-
-        // Re-trigger skill bar animation
-        animateSkillBars();
-    }
-
-    // ===== Mobile Sidebar Toggle =====
-    function toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.querySelector('.sidebar-overlay');
-        const hamburger = document.querySelector('.hamburger');
-
-        sidebar.classList.toggle('open');
-        overlay.classList.toggle('show');
-        hamburger.classList.toggle('active');
-    }
-
-    // ===== Skill Bar Animation =====
-    function animateSkillBars() {
-        const bars = document.querySelectorAll('.skill-bar-fill');
-        bars.forEach(bar => {
-            bar.style.width = '0';
-            setTimeout(() => {
-                bar.style.width = bar.getAttribute('data-width') + '%';
-            }, 100);
-        });
-    }
-
-    // ===== Intersection Observer for Skill Bars =====
-    const skillSection = document.querySelectorAll('.skill-bar-fill');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.width = entry.target.getAttribute('data-width') + '%';
-            }
-        });
-    }, { threshold: 0.3 });
-
-    skillSection.forEach(bar => observer.observe(bar));
-
-    // ===== Initial animation on load =====
-    window.addEventListener('load', () => {
-        setTimeout(animateSkillBars, 600);
-    });
-
-    // ===== Close sidebar on ESC =====
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            const sidebar = document.getElementById('sidebar');
-            if (sidebar.classList.contains('open')) {
-                toggleSidebar();
-            }
-        }
-    });
-</script>
+<script src="script.js"></script>
 </body>
 </html>
